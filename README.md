@@ -1,7 +1,7 @@
 #about
 * グノシーwebサイトからテクノロジー分野の目次をVimで見る
 * OSx 10.10でテスト済み
-
+* rubyスクリプトのpathがイマイチわかんないので調節してください。
 
 #install
 * ruby 2.0.0をinstall
