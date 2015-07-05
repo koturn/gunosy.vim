@@ -16,5 +16,9 @@ nmap gx <Plug>(openbrowser-smart-search)
 
 #using
 <pre>
+:call gunosy#get_gunosy()
+</pre>
+* なぜか下記は実行できない
+<pre>
 :GetGunosy
 </pre>
