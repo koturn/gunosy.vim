@@ -7,11 +7,8 @@ let s:L = s:V.import('Data.List')
 let s:HTTP = s:V.import('Web.HTTP')
 let s:HTML = s:V.import('Web.HTML')
 
-if executable('ruby')
-    let s:ruby_script_path = expand('<sfile>:h') . '/scripts/gunosy.rb'
-else
-    let s:URL = 'https://gunosy.com/categories/7'
-endif
+let s:ruby_script_path = expand('<sfile>:h') . '/scripts/gunosy.rb'
+let s:URL = 'https://gunosy.com/categories/7'
 let g:gunosy#use_ruby = get(g:, 'gunosy#use_ruby', has('ruby'))
 
 
@@ -26,7 +23,7 @@ function! gunosy#get_gunosy() abort
             return
         endif
         " Web.HTTP.parse() is strange: head includes body
-        let nodes = s:xpath(s:HTML.parse(response.content), 'html/head/body/div/div/div/div/ul/li/div/dl/dt/a')
+        let nodes = s:xpath(s:HTML.parse(iconv(response.content, 'utf-8', &enc)), 'html/head/body/div/div/div/div/ul/li/div/dl/dt/a')
         new | setlocal nobuflisted bufhidden=unload buftype=nofile
         for node in nodes
             call append(line('$') - 1, node.attr.href)

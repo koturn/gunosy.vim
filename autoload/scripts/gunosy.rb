@@ -1,3 +1,5 @@
+# _*_ coding: utf-8 _*_
+
 require 'open-uri'
 require 'nokogiri'
 
@@ -14,8 +16,10 @@ end
 doc = Nokogiri::HTML.parse(html, nil, charset)
 # Vimのカレントバッファのオブジェクトを取得
 vim_buffer = VIM::Buffer.current
+# Vimのエンコーディング(オプション:encodingの値)を取得
+vim_charset = VIM::evaluate('&enc')
 # タイトルを表示
 doc.xpath('html/body/div/div/div/div/ul/li/div/dl/dt/a').each do |node|
   vim_buffer.append(vim_buffer.count - 1, node[:href])
-  vim_buffer.append(vim_buffer.count - 1, node.text)
+  vim_buffer.append(vim_buffer.count - 1, node.text.encode(vim_charset))
 end
